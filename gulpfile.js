@@ -26,6 +26,8 @@ var basePaths = {
 // Defining requirements
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
+var autoprefixer = require('autoprefixer');
+var postcss = require('gulp-postcss');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var cssnano = require('gulp-cssnano');
@@ -40,12 +42,12 @@ var merge = require('gulp-merge');
 var sourcemaps = require('gulp-sourcemaps');
 var del = require('del');
 
-gulp.task('default', ['watch', 'cssnano'], function () { });
+gulp.task('default', ['watch'/*, 'cssnano'*/], function () { });
 
 // Starts watcher. Watcher runs gulp sass task on changes
 gulp.task('watch', function () {
     gulp.watch('./sass/**/*.scss', ['sass']);
-    gulp.watch('./css/child-theme.css', ['cssnano']);
+    //gulp.watch('./css/child-theme.css', ['cssnano']);
     gulp.watch([basePaths.dev + 'js/**/*.js'], ['scripts'])
 });
 
@@ -53,7 +55,12 @@ gulp.task('watch', function () {
 gulp.task('sass', function () {
     var stream = gulp.src('./sass/*.scss')
         .pipe(plumber())
+        .pipe(sourcemaps.init())
         .pipe(sass())
+        .pipe(postcss([
+          autoprefixer('last 2 versions', '> 1%')
+        ]))
+        .pipe(sourcemaps.write('./sass/maps'))
         .pipe(gulp.dest('./css'))
         .pipe(rename('custom-editor-style.css'))
         .pipe(gulp.dest('./css'));
@@ -63,11 +70,9 @@ gulp.task('sass', function () {
 // Minifies CSS files
 gulp.task('cssnano', ['cleancss'], function(){
   return gulp.src('./css/*.css')
-    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(plumber())
     .pipe(rename({suffix: '.min'}))
     .pipe(cssnano({discardComments: {removeAll: true}}))
-    .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./css/'));
 });
 
@@ -87,7 +92,9 @@ gulp.task('scripts', function() {
 
         // End - All BS4 stuff
 
-        basePaths.dev + 'js/skip-link-focus-fix.js'
+        basePaths.dev + 'js/skip-link-focus-fix.js',
+
+        './js/navigation.js',
     ];
   gulp.src(scripts)
     .pipe(concat('child-theme.min.js'))

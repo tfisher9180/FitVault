@@ -9,6 +9,7 @@
   "author": "Timothy Fisher",
   "homepage": "https://www.timothyfisherdev.com",
   "dependencies": {
+    "autoprefixer": "^7.1.4",
     "bootstrap": "^4.0.0-alpha.6",
     "del": "^2.2.2",
     "font-awesome": "^4.7.0",
@@ -19,6 +20,7 @@
     "gulp-ignore": "^2.0.2",
     "gulp-merge": "^0.1.1",
     "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-rimraf": "^0.2.1",
     "gulp-sass": "^3.1.0",
@@ -28,7 +30,7 @@
     "merge2": "^1.0.3",
     "owl.carousel": "^2.2.0",
     "run-sequence": "^1.2.2",
-    "undescores-for-npm": "latest",
-    "understrap": "latest"
+    "understrap": "latest",
+    "undescores-for-npm": "latest"
   }
 }
