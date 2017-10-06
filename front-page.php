@@ -21,7 +21,19 @@ $container = get_theme_mod( 'understrap_container_type' );
 		  <div class="container">
 		<?php endif; ?>
 
-
+      <div class="row">
+        <div class="col-md-4">
+          <div class="header-image-text">
+            <h2 class="title">Take the lead.</h2>
+            <p class="description line-one">Join our fitness movement,</p>
+            <p class="description line-two">No fees, no contracts.</p>
+          </div>
+          <div class="header-buttons">
+            <a href="#" class="btn btn-primary btn-outline">Learn More</a>
+            <a href="#" class="btn btn-primary">Join Us Today &raquo;</a>
+          </div>
+        </div>
+      </div>
 
     <?php if ( 'container' == $container ) : ?>
       </div>

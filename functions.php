@@ -95,3 +95,14 @@ function fitvault_widgets_init() {
   ) );
 }
 add_action( 'widgets_init', 'fitvault_widgets_init' );
+
+
+// Makes custom menu widget output Bootstrap 4 menu
+function fitvault_custom_menu_walker( $args ) {
+  return array_merge( $args, array(
+    // add options
+    'menu_class'    => 'navbar-nav',
+    'walker'        => new WP_Bootstrap_Navwalker(), 
+  ) );
+}
+add_filter( 'wp_nav_menu_args', 'fitvault_custom_menu_walker' );
